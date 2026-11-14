@@ -8,8 +8,10 @@ export const useFilterClassroom = () => {
   const classroom =
     CLASSROOM_OPTIONS.find(option => option.value === classroomValue) ?? CLASSROOM_OPTIONS[0];
 
-  const setClassroom = (next: DropdownItem) => {
-    setClassroomValue(next.value);
+  const setClassroom = (next: DropdownItem | null) => {
+    if (next) {
+      setClassroomValue(next.value);
+    }
   };
 
   return {
