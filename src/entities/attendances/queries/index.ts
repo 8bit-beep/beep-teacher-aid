@@ -7,3 +7,5 @@ export const useGetAttendancesByRoomId = (roomId: number) => {
     queryFn: async () => await AttendanceApi.getAttendancesByRoomId(roomId),
   });
 };
+
+export { useClassroomAttendances } from "./use-classroom-attendances";

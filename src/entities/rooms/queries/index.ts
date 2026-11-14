@@ -7,3 +7,5 @@ export const useGetRooms = () => {
     queryFn: async () => await RoomApi.getRooms(),
   });
 };
+
+export { useRooms } from "./use-rooms";
