@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { useRooms } from "@/entities/rooms/queries";
+import Download from "@/features/download/ui/download";
 import { useHistoriesFloor } from "@/features/filter/stores";
 import FilterHistory from "@/features/filter/ui/filter-history";
 import FilterHistoryDateTime from "@/features/filter/ui/filter-history-date-time";
@@ -21,6 +22,7 @@ const HistoriesPage = () => {
         title="출석 기록 조회"
         description="출석 기록을 조회하고 다운로드하세요!"
         icon={<HistoryIcon size={24} />}
+        headerOptions={<Download />}
         mobileFilter={
           <div className="w-full flex flex-col gap-2">
             <FilterHistory />
