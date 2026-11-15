@@ -1,4 +1,7 @@
 import type { Routes } from "@b1nd/aid-kit/navigation";
+import AttendancePage from "@/pages/attendance/ui/attendance-page";
+import EventsPage from "@/pages/events/ui/events-page";
+import RoomPage from "@/pages/room/ui/room-page";
 import { STACK_PATHS, TAB_PATHS } from "@/shared/config/tabs";
 
 export const routes: Routes = {
@@ -6,7 +9,7 @@ export const routes: Routes = {
     {
       path: TAB_PATHS.attendance,
       index: true,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <AttendancePage />,
     },
     {
       path: TAB_PATHS.classroom,
@@ -28,11 +31,11 @@ export const routes: Routes = {
   stacks: [
     {
       path: STACK_PATHS.room,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <RoomPage />,
     },
     {
       path: STACK_PATHS.events,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <EventsPage />,
     },
   ],
 };
