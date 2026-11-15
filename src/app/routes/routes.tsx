@@ -1,4 +1,5 @@
 import type { Routes } from "@b1nd/aid-kit/navigation";
+import AttendancePage from "@/pages/attendance/ui/attendance-page";
 import { STACK_PATHS, TAB_PATHS } from "@/shared/config/tabs";
 
 export const routes: Routes = {
@@ -6,7 +7,7 @@ export const routes: Routes = {
     {
       path: TAB_PATHS.attendance,
       index: true,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <AttendancePage />,
     },
     {
       path: TAB_PATHS.classroom,
