@@ -7,9 +7,11 @@ import { RouteProvider, Router, useRouter } from "@b1nd/aid-kit/navigation";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ModalProvider } from "@beep-ds/ui";
 import { ToastContainer } from "@cher1shrxd/toast";
-import { AuthProvider } from "@/features/auth";
+import { AuthProvider, useAuthState } from "@/features/auth";
 import { TAB_PATHS } from "@/shared/config/tabs";
 import { queryClient } from "@/shared/lib/query-refresh";
+import Header from "@/widgets/header/ui/header";
+import Tabbar from "@/widgets/tabbar/ui/tabbar";
 import { routes } from "./routes";
 import { AuthGate } from "./ui/auth-gate";
 import { ErrorBoundary } from "./ui/error-boundary";
@@ -24,6 +26,9 @@ const VALID_TAB_PATHS = routes.tabs.map(tab => tab.path);
 function AppShell() {
   const { top, bottom } = useSafeArea();
   const { tab, stack } = useRouter();
+  const { state } = useAuthState();
+  const isAuthenticated = state.status === "authenticated";
+  const isStackOpen = stack.current.length > 0;
   const safeAreaStyle: SafeAreaProperties = {
     "--native-safe-area-top": `${top}px`,
     "--native-safe-area-bottom": `${bottom}px`,
@@ -43,6 +48,7 @@ function AppShell() {
     <div className="app-shell bg-greyscale-10" style={safeAreaStyle}>
       <ToastContainer />
       <ModalProvider />
+      {isAuthenticated && <Header />}
       <main className="app-shell__scroll">
         <ErrorBoundary>
           <AuthGate>
@@ -50,6 +56,7 @@ function AppShell() {
           </AuthGate>
         </ErrorBoundary>
       </main>
+      {isAuthenticated && !isStackOpen && <Tabbar />}
     </div>
   );
 }
