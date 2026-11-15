@@ -1,0 +1,60 @@
+html,
+body {
+  touch-action: pan-y pan-x;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+#root {
+  block-size: 100vh;
+  block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.app-shell {
+  flex: 1;
+  min-inline-size: 0;
+  min-block-size: 0;
+  display: flex;
+  flex-direction: column;
+  padding-block-start: max(var(--native-safe-area-top), env(safe-area-inset-top, 0px));
+  padding-block-end: max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+}
+
+.app-shell__scroll {
+  flex: 1;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  overflow-wrap: anywhere;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Router가 렌더링하는 애니메이션 래퍼(div)에 min-height%만 주면 percentage
+   height 체인이 끊겨 자식의 min-h-full이 안 먹는다. height를 명시해야
+   자식이 퍼센트 높이를 상속받아 배경색을 스크롤 영역 끝까지 채울 수 있다. */
+.app-shell__scroll > * {
+  block-size: 100%;
+}
+
+/* ModalProvider가 body 직계(#bds-modal-root)에 포털로 렌더링되므로
+   루트 Safe Area 변수를 상속받아 노치/홈 인디케이터와 겹치지 않게 보정한다. */
+#bds-modal-root > div {
+  padding-block-start: max(var(--native-safe-area-top), env(safe-area-inset-top, 0px), 16px);
+  padding-block-end: max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px), 16px);
+  padding-inline: 16px;
+}
+
+#bds-modal-root > div > div {
+  max-block-size: calc(
+    100dvh - max(var(--native-safe-area-top), env(safe-area-inset-top, 0px), 16px) -
+      max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px), 16px)
+  );
+  max-inline-size: 100%;
+}

@@ -1,0 +1,43 @@
+import api from "@/shared/libs/api";
+import type { Attendance } from "../types";
+
+export const AttendanceApi = {
+  getAttendancesByRoomId: async (roomId: number) => {
+    try {
+      return await api.get<Attendance[]>(`/attendances?roomId=${roomId}&isCurrentCheckpoint=true`);
+    } catch {
+      return { data: [] as Attendance[] };
+    }
+  },
+
+  getAttendancesByClassroom: async (grade: number, classNumber: number, date?: string) => {
+    try {
+      return await api.get<Attendance[]>(
+        `/attendances?grade=${grade}&classNumber=${classNumber}&isCurrentCheckpoint=false${date ? `&date=${encodeURIComponent(date)}` : ""}`
+      );
+    } catch {
+      return { data: [] as Attendance[] };
+    }
+  },
+
+  getAttendancesByRoomIdWithAllCheckpoints: async (roomId: number) => {
+    return await api.get(`/attendances?roomId=${roomId}&isCurrentCheckpoint=false`);
+  },
+
+  updateAttendanceStatus: async (data: { userId: number; statusId: number }) => {
+    return await api.patch(`/attendances/status`, data);
+  },
+
+  updateAttendanceStatuses: async (data: { userIds: number[]; typeId: number }) => {
+    return await api.patch(`/attendances/statuses`, data);
+  },
+
+  updateAttendanceStatusWithCheckpoint: async (data: {
+    userId: number;
+    statusId: number;
+    checkpointId: number;
+    date?: string;
+  }) => {
+    return await api.patch(`/attendances/status`, data);
+  },
+};
