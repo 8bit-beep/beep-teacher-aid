@@ -69,9 +69,7 @@ export const useFileSave = () => {
         const timer = setTimeout(() => {
           if (pendingRef.current) {
             pendingRef.current = null;
-            reject(
-              new AidBridgeError("요청 시간이 초과됐어요. 다시 시도해 주세요.", "TIMEOUT")
-            );
+            reject(new AidBridgeError("요청 시간이 초과됐어요. 다시 시도해 주세요.", "TIMEOUT"));
           }
         }, FILE_SAVE_TIMEOUT_MS);
 
