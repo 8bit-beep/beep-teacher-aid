@@ -40,9 +40,9 @@ const MobileHistoriesDropdownContentItem = ({
         <p className="text-accent text-greyscale-40">{data.studentId}</p>
         <p className="text-accent text-static-black">{data.name}</p>
       </div>
-      <div className="w-full flex flex-row gap-2">
+      <div className="w-full flex flex-row gap-2 overflow-x-auto">
         {data.statuses.map((statusItem, statusIndex) => (
-          <div key={statusItem.checkpoint.id} className="flex-1 min-w-0">
+          <div key={statusItem.checkpoint.id} className="flex-1 min-w-24">
             <ManageHistoryDropdown data={data} roomId={roomId} index={statusIndex} />
           </div>
         ))}

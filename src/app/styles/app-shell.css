@@ -42,3 +42,19 @@ body {
 .app-shell__scroll > * {
   block-size: 100%;
 }
+
+/* ModalProvider가 body 직계(#bds-modal-root)에 포털로 렌더링되므로
+   루트 Safe Area 변수를 상속받아 노치/홈 인디케이터와 겹치지 않게 보정한다. */
+#bds-modal-root > div {
+  padding-block-start: max(var(--native-safe-area-top), env(safe-area-inset-top, 0px), 16px);
+  padding-block-end: max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px), 16px);
+  padding-inline: 16px;
+}
+
+#bds-modal-root > div > div {
+  max-block-size: calc(
+    100dvh - max(var(--native-safe-area-top), env(safe-area-inset-top, 0px), 16px) -
+      max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px), 16px)
+  );
+  max-inline-size: 100%;
+}
