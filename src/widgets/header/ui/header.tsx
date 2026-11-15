@@ -4,6 +4,7 @@ import { useAuth } from "@/features/auth";
 import FilterHistory from "@/features/filter/ui/filter-history";
 import FilterHistoryDateTime from "@/features/filter/ui/filter-history-date-time";
 import FilterRoom from "@/features/filter/ui/filter-room";
+import CreateAbsence from "@/features/manage-absences/ui/create-absence";
 import RefreshButton from "@/features/manage-attends/ui/refresh-button";
 import ManageMemo from "@/features/manage-memo/ui/manage-memo";
 import { TAB_PATHS } from "@/shared/config/tabs";
@@ -15,7 +16,7 @@ const Header = () => {
 
   const headerContentMap: Record<string, ReactNode> = {
     [TAB_PATHS.attendance]: <FilterRoom />,
-    [TAB_PATHS.absences]: null, // 외박 등록 버튼은 Cycle 7에서 추가
+    [TAB_PATHS.absences]: <CreateAbsence />,
     [TAB_PATHS.histories]: (
       <div className="w-full flex flex-col sm:flex-row gap-5 sm:gap-4">
         <div className="flex items-center gap-4">

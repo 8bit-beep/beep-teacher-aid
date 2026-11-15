@@ -1,4 +1,5 @@
 import type { Routes } from "@b1nd/aid-kit/navigation";
+import AbsencesPage from "@/pages/absences/ui/absences-page";
 import AttendancePage from "@/pages/attendance/ui/attendance-page";
 import ClassroomPage from "@/pages/classroom/ui/classroom-page";
 import EventsPage from "@/pages/events/ui/events-page";
@@ -19,7 +20,7 @@ export const routes: Routes = {
     },
     {
       path: TAB_PATHS.absences,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <AbsencesPage />,
     },
     {
       path: TAB_PATHS.shifts,
