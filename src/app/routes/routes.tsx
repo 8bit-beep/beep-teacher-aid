@@ -1,5 +1,6 @@
 import type { Routes } from "@b1nd/aid-kit/navigation";
 import AttendancePage from "@/pages/attendance/ui/attendance-page";
+import RoomPage from "@/pages/room/ui/room-page";
 import { STACK_PATHS, TAB_PATHS } from "@/shared/config/tabs";
 
 export const routes: Routes = {
@@ -29,7 +30,7 @@ export const routes: Routes = {
   stacks: [
     {
       path: STACK_PATHS.room,
-      element: () => <div className="min-h-full bg-greyscale-10" />,
+      element: () => <RoomPage />,
     },
     {
       path: STACK_PATHS.events,
