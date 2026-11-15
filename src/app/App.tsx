@@ -35,6 +35,12 @@ function AppShell() {
   };
 
   useEffect(() => {
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--native-safe-area-top", `${top}px`);
+    rootStyle.setProperty("--native-safe-area-bottom", `${bottom}px`);
+  }, [top, bottom]);
+
+  useEffect(() => {
     if (!VALID_TAB_PATHS.includes(tab.current)) {
       tab.move(TAB_PATHS.attendance);
     }

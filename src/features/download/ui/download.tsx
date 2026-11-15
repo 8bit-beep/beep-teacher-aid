@@ -1,0 +1,14 @@
+import { Button } from "@beep-ds/ui";
+import { useDownload } from "../hooks/use-download";
+
+const Download = () => {
+  const handleDownloadExcel = useDownload();
+
+  return (
+    <Button buttonSize="small" buttonType="primary" showIcon onClick={handleDownloadExcel}>
+      엑셀 다운로드
+    </Button>
+  );
+};
+
+export default Download;
