@@ -44,7 +44,9 @@ const ScheduleModal = () => {
               <div className="flex-1 min-w-0">
                 <Dropdown
                   options={getOptions(grade)}
-                  selected={getOptions(grade).find(option => option.value === selected[grade]) ?? null}
+                  selected={
+                    getOptions(grade).find(option => option.value === selected[grade]) ?? null
+                  }
                   onSelect={item => select(grade, item)}
                   dropdownSize="medium"
                   width="100%"

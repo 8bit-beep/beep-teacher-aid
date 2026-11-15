@@ -14,10 +14,16 @@ const RoomTable = () => {
     <div className="hidden lg:flex w-full min-h-0 flex-col">
       <div className="w-full flex items-center pl-10 pr-10 py-3 bg-blue-light">
         <div className="flex-1 text-left text-static-white text-body lg:text-h4">실 정보</div>
-        <div style={{ width: "140px" }} className="text-left text-static-white text-body lg:text-h4">
+        <div
+          style={{ width: "140px" }}
+          className="text-left text-static-white text-body lg:text-h4"
+        >
           승인 시각
         </div>
-        <div style={{ width: "144px" }} className="text-left text-static-white text-body lg:text-h4">
+        <div
+          style={{ width: "144px" }}
+          className="text-left text-static-white text-body lg:text-h4"
+        >
           승인 책임자
         </div>
         <div

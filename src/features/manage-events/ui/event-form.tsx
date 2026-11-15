@@ -122,12 +122,7 @@ const EventForm = ({ date, detail, onDone, onCancel }: Props) => {
 
       <div className="w-full flex items-center gap-2">
         {detail && (
-          <Button
-            buttonSize="medium"
-            buttonType="ghost"
-            onClick={onCancel}
-            style={{ flex: 1 }}
-          >
+          <Button buttonSize="medium" buttonType="ghost" onClick={onCancel} style={{ flex: 1 }}>
             취소
           </Button>
         )}

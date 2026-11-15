@@ -5,9 +5,7 @@ import { FilterBar } from "@/shared/ui/filter-bar";
 const FloorFilterBar = () => {
   const [selectedFloor, setSelectedFloor] = useAttendanceFloor();
 
-  return (
-    <FilterBar options={FLOOR_OPTIONS} selected={selectedFloor} onChange={setSelectedFloor} />
-  );
+  return <FilterBar options={FLOOR_OPTIONS} selected={selectedFloor} onChange={setSelectedFloor} />;
 };
 
 export default FloorFilterBar;

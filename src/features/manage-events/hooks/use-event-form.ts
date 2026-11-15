@@ -21,10 +21,8 @@ export const useEventForm = ({ date, detail, onDone }: Params) => {
   const [students, setStudents] = useState<Map<number, string>>(
     () =>
       new Map(
-        detail?.students.map(student => [
-          student.userId,
-          `${student.studentId} ${student.name}`,
-        ]) ?? []
+        detail?.students.map(student => [student.userId, `${student.studentId} ${student.name}`]) ??
+          []
       )
   );
 
@@ -48,9 +46,7 @@ export const useEventForm = ({ date, detail, onDone }: Params) => {
 
   const toggleCheckpoint = (checkpointId: number) => {
     setCheckpointIds(prev =>
-      prev.includes(checkpointId)
-        ? prev.filter(id => id !== checkpointId)
-        : [...prev, checkpointId]
+      prev.includes(checkpointId) ? prev.filter(id => id !== checkpointId) : [...prev, checkpointId]
     );
   };
 
