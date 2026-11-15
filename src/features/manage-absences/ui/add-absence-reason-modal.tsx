@@ -6,7 +6,10 @@ import { toast } from "@cher1shrxd/toast";
 import { Button, DatePicker, Dropdown, type DropdownItem, modal } from "@beep-ds/ui";
 import { useState } from "react";
 import { useGetAbsenceReason } from "../hooks/use-get-absence-reason";
-import { getCreateAbsenceToastState, useCreateAbsenceMutation } from "@/entities/absences/mutations";
+import {
+  getCreateAbsenceToastState,
+  useCreateAbsenceMutation,
+} from "@/entities/absences/mutations";
 
 interface Props {
   selectedStudents: number[];

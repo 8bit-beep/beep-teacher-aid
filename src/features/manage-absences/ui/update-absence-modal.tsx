@@ -39,8 +39,7 @@ const UpdateAbsenceModal = ({ data }: Props) => {
   const { selectedStudents, setSelectedStudents } = useSelectStudents(initialSelectedStudents);
   const [isPending, setIsPending] = useState(false);
   const ownAbsenceIds = useMemo(
-    () =>
-      absences.map(absence => absence.absenceId).filter((id): id is number => id !== null),
+    () => absences.map(absence => absence.absenceId).filter((id): id is number => id !== null),
     [absences]
   );
   const getLockedStatusName = useAbsenceConflictStatus(absences, {

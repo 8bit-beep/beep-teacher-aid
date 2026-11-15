@@ -13,7 +13,10 @@ import {
 import { refreshQueries } from "@/shared/lib/query-refresh";
 import { useGetAbsenceReason } from "./use-get-absence-reason";
 import { useFindRegisteredAbsences } from "./use-find-registered-absences";
-import { getCreateAbsenceToastState, useCreateAbsenceMutation } from "@/entities/absences/mutations";
+import {
+  getCreateAbsenceToastState,
+  useCreateAbsenceMutation,
+} from "@/entities/absences/mutations";
 
 interface DraftAbsence {
   id: number;
@@ -58,7 +61,10 @@ interface Props {
   initialPhase?: "list" | "add";
 }
 
-export const useCreateAbsence = ({ initialSelectedStudents, initialPhase = "list" }: Props = {}) => {
+export const useCreateAbsence = ({
+  initialSelectedStudents,
+  initialPhase = "list",
+}: Props = {}) => {
   const { options, nameById } = useGetAbsenceReason();
   const { mutateAsync } = useCreateAbsenceMutation();
   const findRegisteredAbsences = useFindRegisteredAbsences();

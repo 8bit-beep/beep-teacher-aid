@@ -34,10 +34,7 @@ export const useResolveAbsenceUserIds = (targetStudents: AbsenceTargetStudent[])
     [targetStudents]
   );
 
-  const infoIds = useMemo(
-    () => targetStudents.map(student => student.info.id),
-    [targetStudents]
-  );
+  const infoIds = useMemo(() => targetStudents.map(student => student.info.id), [targetStudents]);
 
   const shouldFetch = initialIds.length === 0 && classes.length > 0;
 
