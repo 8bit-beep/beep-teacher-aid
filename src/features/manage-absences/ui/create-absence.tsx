@@ -1,0 +1,21 @@
+import { Button, modal } from "@beep-ds/ui";
+import CreateAbsenceModal from "./create-absence-modal";
+
+const CreateAbsence = () => {
+  return (
+    <Button
+      buttonSize="medium"
+      buttonType="primary"
+      onClick={() =>
+        modal.open({
+          title: "외박자 추가하기",
+          content: <CreateAbsenceModal />,
+        })
+      }
+    >
+      외박자 추가하기
+    </Button>
+  );
+};
+
+export default CreateAbsence;
