@@ -1,5 +1,6 @@
 import { Component, type ErrorInfo, type PropsWithChildren, type ReactNode } from "react";
 import { Button } from "@beep-ds/ui";
+import logo from "@/assets/logo.svg";
 
 type ErrorBoundaryState = {
   hasError: boolean;
@@ -26,7 +27,7 @@ export class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundarySta
     if (this.state.hasError) {
       return (
         <div className="flex min-h-full flex-col items-center justify-center bg-greyscale-10 px-6 text-center">
-          <img src="./logo.svg" alt="Logo" width={120} height={120} className="mb-6" />
+          <img src={logo} alt="Logo" width={120} height={120} className="mb-6" />
           <h1 className="text-h2 font-bold mb-2">문제가 발생했습니다</h1>
           <p className="mb-6 text-greyscale-50 text-center">
             예기치 못한 오류가 발생했습니다.

@@ -7,6 +7,7 @@ import FilterRoom from "@/features/filter/ui/filter-room";
 import RefreshButton from "@/features/manage-attends/ui/refresh-button";
 import ManageMemo from "@/features/manage-memo/ui/manage-memo";
 import { TAB_PATHS } from "@/shared/config/tabs";
+import logo from "@/assets/logo.svg";
 
 const Header = () => {
   const { tab } = useRouter();
@@ -37,7 +38,7 @@ const Header = () => {
         className="shrink-0 cursor-pointer"
         aria-label="출석 조회로 이동"
       >
-        <img src="/logo.svg" alt="logo" width={40} height={40} className="h-10 w-auto" />
+        <img src={logo} alt="logo" width={40} height={40} className="h-10 w-auto" />
       </button>
       <div className="w-full min-w-0 flex items-center gap-5">
         {headerContent && <div className="hidden lg:flex">{headerContent}</div>}
