@@ -6,6 +6,7 @@ type AuthStatusScreenProps = {
   description: string;
   loading?: boolean;
   onRetry?: () => void;
+  onBack?: () => void;
 };
 
 export const AuthStatusScreen = ({
@@ -13,6 +14,7 @@ export const AuthStatusScreen = ({
   description,
   loading = false,
   onRetry,
+  onBack,
 }: AuthStatusScreenProps) => {
   return (
     // 앱 셸의 스크롤 영역(.app-shell__scroll) 안에 놓이므로 dvh가 아니라 부모 높이를 채운다.
@@ -30,11 +32,18 @@ export const AuthStatusScreen = ({
         )}
         <h1 className="text-h3 font-bold text-greyscale-90">{title}</h1>
         <p className="text-body2 leading-6 text-greyscale-60">{description}</p>
-        {onRetry && (
-          <div className="mt-3 flex w-full justify-center">
-            <Button buttonType="primary" buttonSize="large" onClick={onRetry}>
-              다시 시도
-            </Button>
+        {(onRetry || onBack) && (
+          <div className="mt-3 flex w-full flex-col items-center gap-2">
+            {onRetry && (
+              <Button buttonType="primary" buttonSize="large" onClick={onRetry}>
+                다시 시도
+              </Button>
+            )}
+            {onBack && (
+              <Button buttonType={onRetry ? "text" : "primary"} buttonSize="large" onClick={onBack}>
+                뒤로가기
+              </Button>
+            )}
           </div>
         )}
       </div>
