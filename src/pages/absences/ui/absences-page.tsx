@@ -11,7 +11,7 @@ const AbsencesContent = () => {
 
 const AbsencesPage = () => {
   return (
-    <div className="w-full h-full flex flex-col gap-4.5 px-5 pb-5 lg:px-13.5 lg:pb-6">
+    <div className="w-full h-full flex flex-col gap-4.5 lg:px-13.5 lg:pb-6">
       <Suspense
         fallback={
           <div className="w-full flex items-center justify-center py-20 text-greyscale-50">

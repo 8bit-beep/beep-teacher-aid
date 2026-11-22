@@ -58,3 +58,48 @@ body {
   );
   max-inline-size: 100%;
 }
+
+/* 폰 화면에서 모달이 내용 폭만큼 좁아지지 않도록 디자인처럼 화면 폭(좌우 16px 여백)에 맞춘다. */
+@media (max-width: 1023px) {
+  #bds-modal-root > div > div {
+    inline-size: 100%;
+    max-inline-size: 480px;
+  }
+}
+
+/* 좁은 화면에서 DS Dropdown의 기본 좌우 여백(20px)이 커서 "교실자습" 같은
+   상태명이 말줄임되므로, 표 안의 드롭다운은 여백을 줄여 디자인 폭에 맞춘다. */
+.compact-dropdown div:has(> div > span + svg) {
+  padding-inline: 12px !important;
+}
+
+.compact-dropdown div:has(> span + svg) {
+  gap: 6px !important;
+}
+
+/* 웹뷰 앱이므로 스크롤바를 숨겨 네이티브 화면처럼 보이게 한다. */
+.app-shell *,
+#bds-modal-root * {
+  scrollbar-width: none;
+}
+
+.app-shell *::-webkit-scrollbar,
+#bds-modal-root *::-webkit-scrollbar {
+  display: none;
+}
+
+/* 모달 안 "시작일 ~ 종료일" 두 DatePicker가 좁은 폭에서 줄바꿈되지 않도록
+   남는 폭을 반씩 나눠 쓰고 여백과 글자 크기를 줄인다. */
+.date-range > div {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto !important;
+  padding-inline: 12px !important;
+  gap: 6px !important;
+}
+
+.date-range > div > span {
+  white-space: nowrap;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}

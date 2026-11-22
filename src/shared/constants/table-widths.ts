@@ -14,3 +14,10 @@ export function getClassroomTableWidths(checkpointCount: number) {
     lastHeaderWidth: isCompact ? WIDTHS.lastHeader.compact : WIDTHS.lastHeader.default,
   };
 }
+
+/**
+ * 폰 화면의 교시별 상태 드롭다운 칸 폭.
+ * 섹션 좌우 여백(16px×2) + 행 좌우 여백(16px×2) + 칸 간격(10px×2)을 뺀 폭을 3등분해
+ * 교시 3칸이 한 화면에 들어오고, 그 이상은 가로 스크롤된다.
+ */
+export const MOBILE_STATUS_CELL_WIDTH = "w-[max(96px,calc((100vw-5.25rem)/3))]";

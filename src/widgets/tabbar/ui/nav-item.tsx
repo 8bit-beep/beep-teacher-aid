@@ -9,17 +9,23 @@ interface Props {
 
 const NavItem = ({ icon, label, path }: Props) => {
   const { tab } = useRouter();
+  const isActive = tab.current === path;
 
   return (
     <button
       type="button"
       onClick={() => tab.move(path)}
-      className={`${
-        tab.current === path ? "text-blue-light" : "text-static-black"
-      } w-12 h-11 rounded-medium flex flex-col items-center justify-between cursor-pointer`}
+      aria-current={isActive ? "page" : undefined}
+      className="flex-1 min-w-0 flex justify-center cursor-pointer"
     >
-      {icon}
-      <p className="text-caption1">{label}</p>
+      <span
+        className={`${
+          isActive ? "bg-greyscale-10" : "bg-transparent"
+        } w-16 h-12 rounded-medium flex flex-col items-center justify-center gap-1 text-static-black`}
+      >
+        <span className="size-6 flex items-center justify-center">{icon}</span>
+        <span className="text-[11px] font-medium leading-none whitespace-nowrap">{label}</span>
+      </span>
     </button>
   );
 };

@@ -20,15 +20,17 @@ const EventPanel = ({ today, date, onClose }: Props) => {
 
   return (
     <div className="w-full h-full bg-static-white flex flex-col gap-4 p-4 overflow-y-auto">
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between gap-4">
         <button
           type="button"
           onClick={phase.type === "list" ? onClose : backToList}
-          className="size-11 rounded-full bg-static-white shadow-modal flex items-center justify-center text-static-black cursor-pointer"
+          className="size-11 shrink-0 rounded-full bg-static-white shadow-modal flex items-center justify-center text-static-black cursor-pointer"
         >
           {phase.type === "list" ? <CloseIcon /> : <ChevronIcon size={16} rotate={90} />}
         </button>
-        <h2 className="text-h3 text-static-black">{formatEventDate(today)} 행사 관리</h2>
+        <h2 className="min-w-0 text-accent text-static-black truncate">
+          {formatEventDate(today)} 행사 관리
+        </h2>
       </div>
 
       <Suspense

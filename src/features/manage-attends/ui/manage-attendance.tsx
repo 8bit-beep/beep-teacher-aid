@@ -10,7 +10,6 @@ import { CloseIcon } from "@/shared/icons/close-icon";
 import { useBatchUpdateAttendance } from "../hooks/use-batch-update-attendance";
 import AttendanceItem from "./attendance-item";
 import BatchChangeBar from "./batch-change-bar";
-import Refresh from "./refresh";
 
 interface Props {
   room: Room;
@@ -47,70 +46,55 @@ const ManageAttendance = ({ room }: Props) => {
 
   return (
     <div
-      className={`w-full h-full bg-static-white flex flex-col items-start gap-4 p-4 ${animationClass}`}
+      className={`w-full h-full bg-static-white flex flex-col items-start gap-4 px-4 pt-4 ${animationClass}`}
       {...handlers}
     >
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center gap-4">
         <button
           type="button"
           onClick={triggerClose}
-          className="bg-static-white shadow-modal rounded-full p-4 cursor-pointer"
+          aria-label="닫기"
+          className="size-11 shrink-0 bg-static-white shadow-modal rounded-full flex items-center justify-center cursor-pointer"
         >
           <CloseIcon />
         </button>
-        <h1 className="text-h3">
+        <h1 className="min-w-0 text-accent text-static-black truncate">
           {room.grade && room.classNumber
             ? `${room.grade}-${room.classNumber} (${room.name})`
             : room.name}
         </h1>
       </div>
-      <div className="w-full flex flex-col min-[453px]:flex-row justify-between items-end min-[453px]:items-center gap-2">
-        <p className="text-blue-light text-accent">
+      <div className="w-full flex justify-between items-center gap-3">
+        <p className="min-w-0 text-blue-light text-body break-keep">
           {`인원 ${currentStudentCount}/${attendances.length}명`}
           {" · "}
           {`외박 ${attendances.filter(a => a.statuses[0]?.status?.name === "외박").length}명`}
           {" · "}
           {`외출 ${attendances.filter(a => a.statuses[0]?.status?.name === "외출").length}명`}
         </p>
-        <div className="flex items-center gap-2">
-          <Refresh />
-          <div className="flex items-center gap-2 text-green-light">
-            {isApproved ? (
-              <Button
-                buttonSize="small"
-                buttonType="danger"
-                onClick={e => {
-                  e.stopPropagation();
-                  toggleApproval();
-                }}
-              >
-                승인취소
-              </Button>
-            ) : (
-              <Button
-                buttonSize="small"
-                buttonType="primary"
-                onClick={e => {
-                  e.stopPropagation();
-                  toggleApproval();
-                }}
-              >
-                승인하기
-              </Button>
-            )}
-          </div>
+        <div className="shrink-0">
+          <Button
+            buttonSize="small"
+            buttonType={isApproved ? "danger" : "primary"}
+            onClick={e => {
+              e.stopPropagation();
+              toggleApproval();
+            }}
+          >
+            {isApproved ? "승인취소" : "승인하기"}
+          </Button>
         </div>
       </div>
-      <div className="w-full flex-1 min-h-0 rounded-medium shadow-modal flex flex-col overflow-hidden">
-        <div className="w-full flex-1 overflow-scroll">
+      <div className="w-[calc(100%+2rem)] -mx-4 flex-1 min-h-0 flex flex-col overflow-hidden border-t border-greyscale-20 lg:w-full lg:mx-0 lg:border-t-0 lg:rounded-medium lg:shadow-modal">
+        <div className="w-full flex-1 overflow-y-auto overscroll-contain">
           {attendances.length > 0 && (
-            <div className="w-full h-12 flex items-center px-4 gap-2.5 min-[453px]:gap-4 border-b border-greyscale-20 bg-static-white sticky top-0 z-[1]">
+            <div className="w-full h-12 flex items-center px-4 gap-3 border-b border-greyscale-20 bg-static-white sticky top-0 z-[1]">
               <Checkbox
                 checked={allSelected}
                 onChange={() => toggleSelectAll(attendances.map(a => a.userId))}
               />
               <p
-                className={`text-caption1 min-[453px]:text-body ${allSelected ? "text-blue-light" : "text-greyscale-40"}`}
+                className={`text-caption1 ${allSelected ? "text-blue-light" : "text-greyscale-40"}`}
               >
                 {allSelected ? "전체 해제" : "전체 선택"}
               </p>

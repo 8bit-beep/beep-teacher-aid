@@ -2,10 +2,15 @@ import { modal } from "@beep-ds/ui";
 import { useGetSortModesQuery } from "@/entities/sort-modes/queries";
 import { GRADES } from "@/shared/constants/grade";
 import ChevronIcon from "@/shared/icons/chevron-icon";
+import TriangleIcon from "@/shared/icons/triangle-icon";
 import { DEFAULT_SCHEDULE_LABEL } from "../constants/schedule";
 import ScheduleModal from "./schedule-modal";
 
-const ScheduleButton = () => {
+interface Props {
+  variant?: "button" | "select";
+}
+
+const ScheduleButton = ({ variant = "button" }: Props) => {
   const { data } = useGetSortModesQuery();
 
   if (!data) return null;
@@ -21,6 +26,20 @@ const ScheduleButton = () => {
   const handleOpen = () => {
     modal.open({ title: "학년별 스케줄", content: <ScheduleModal /> });
   };
+
+  if (variant === "select") {
+    return (
+      <button
+        type="button"
+        onClick={handleOpen}
+        aria-label={`학년별 스케줄: ${summary}`}
+        className="w-full h-10 px-5 flex items-center justify-between gap-4 bg-static-white rounded-large shadow-modal cursor-pointer"
+      >
+        <span className="min-w-0 text-caption1 text-static-black truncate">{summary}</span>
+        <TriangleIcon size={12} className="shrink-0 text-blue-light" />
+      </button>
+    );
+  }
 
   return (
     <button

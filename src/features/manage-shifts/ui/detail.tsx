@@ -18,12 +18,11 @@ const Detail = ({ data }: Props) => {
           신청 내용 보기
         </Button>
       </div>
-      <p
-        className="lg:hidden w-full text-right text-greyscale-70 text-body cursor-pointer"
-        onClick={openDetailModal}
-      >
-        상세 보기
-      </p>
+      <div className="lg:hidden shrink-0">
+        <Button buttonSize="small" buttonType="primary" onClick={openDetailModal}>
+          상세 보기
+        </Button>
+      </div>
     </>
   );
 };

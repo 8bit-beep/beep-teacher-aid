@@ -15,7 +15,7 @@ const ManageMemo = () => {
   return (
     <button
       type="button"
-      className={`relative h-10 px-6 rounded-large shadow-modal flex items-center gap-2.5 bg-static-white cursor-pointer ${
+      className={`relative h-10 shrink-0 px-5 rounded-large shadow-modal flex items-center gap-2 bg-static-white cursor-pointer ${
         hasUnread ? "outline-2 outline-red-light" : ""
       }`}
       onClick={() => {
@@ -27,9 +27,9 @@ const ManageMemo = () => {
     >
       <div className="relative">
         {hasUnread && <AlertIcon className="absolute -top-1 -left-1.5 text-red-light" size={12} />}
-        <MemoIcon className="text-blue-light" size={20} />
+        <MemoIcon className="text-blue-light" size={22} />
       </div>
-      <p className="text-body text-static-black">메모</p>
+      <p className="text-caption1 text-static-black whitespace-nowrap">메모</p>
     </button>
   );
 };

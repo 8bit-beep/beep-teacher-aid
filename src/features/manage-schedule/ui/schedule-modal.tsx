@@ -34,7 +34,7 @@ const ScheduleModal = () => {
   };
 
   return (
-    <div className="w-60 max-w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-3 px-2.5 py-3">
         {GRADES.map((grade, index) => (
           <Fragment key={grade}>

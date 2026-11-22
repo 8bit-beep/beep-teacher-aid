@@ -8,6 +8,7 @@ import CreateAbsence from "@/features/manage-absences/ui/create-absence";
 import RefreshButton from "@/features/manage-attends/ui/refresh-button";
 import ManageMemo from "@/features/manage-memo/ui/manage-memo";
 import { TAB_PATHS } from "@/shared/config/tabs";
+import ProfileIcon from "@/shared/icons/profile-icon";
 import logo from "@/assets/logo.svg";
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
   const headerContent = headerContentMap[tab.current];
 
   return (
-    <header className="w-full min-h-12.5 flex items-center gap-5 my-4 px-5 lg:px-13.5">
+    <header className="w-full shrink-0 flex items-center gap-4 py-6 px-4 lg:gap-5 lg:my-4 lg:py-0 lg:px-13.5">
       <button
         type="button"
         onClick={() => tab.move(TAB_PATHS.attendance)}
@@ -41,17 +42,20 @@ const Header = () => {
       >
         <img src={logo} alt="logo" width={40} height={40} className="h-10 w-auto" />
       </button>
-      <div className="w-full min-w-0 flex items-center gap-5">
+      <div className="flex-1 min-w-0 flex items-center gap-4 lg:gap-5">
         {headerContent && <div className="hidden lg:flex">{headerContent}</div>}
         <Suspense
-          fallback={<div className="h-10 w-24 rounded-large bg-static-white shadow-modal" />}
+          fallback={<div className="h-10 w-25 rounded-large bg-static-white shadow-modal" />}
         >
           <ManageMemo />
         </Suspense>
         <RefreshButton />
       </div>
-      <div className="w-fit flex items-center gap-2 shrink-0">
-        <p className="text-caption1 text-static-black inline-block min-w-9 truncate">{user.name}</p>
+      <div className="min-w-0 max-w-28 flex items-center gap-1.5 shrink">
+        <ProfileIcon size={24} className="shrink-0 text-blue-light" />
+        <p className="min-w-0 text-[12px] font-medium leading-none text-static-black truncate">
+          {user.name}
+        </p>
       </div>
     </header>
   );

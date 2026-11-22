@@ -9,7 +9,7 @@ interface Props {
 
 const MobileClassroomItem = ({ data, date }: Props): ReactNode[] =>
   data.statuses.map((statusItem, statusIndex) => (
-    <div key={statusItem.checkpoint.id} className="py-2 px-1">
+    <div key={statusItem.checkpoint.id} className="compact-dropdown">
       <ClassroomDropdown data={data} statusIndex={statusIndex} date={date} />
     </div>
   ));

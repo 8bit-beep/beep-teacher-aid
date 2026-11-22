@@ -143,20 +143,23 @@ const AbsencesDropdownTable = ({ data, allData = data }: Props) => {
         <button
           type="button"
           onClick={toggle}
-          className="w-full h-13.5 px-2 flex items-center justify-between border-b border-greyscale-20 cursor-pointer"
+          className="w-full h-13.5 px-3 flex items-center justify-between border-b border-greyscale-20 cursor-pointer"
         >
           <div className="flex items-center gap-2">
             <p className="text-accent text-static-black">{group.label}</p>
             <p className="text-accent text-static-black">·</p>
             <p className="text-accent text-blue-light">{group.items.length}명</p>
           </div>
-          <ChevronIcon size={16} className="text-static-black" rotate={isOpen ? 0 : -180} />
+          <ChevronIcon size={16} className="text-static-black" rotate={isOpen ? 180 : 0} />
         </button>
       )}
       renderContent={group => (
         <div className="w-full">
           {group.items.map((row, index) => (
-            <div key={row.rowKey} className={index % 2 === 0 ? "bg-[#EFF8FF]" : "bg-white"}>
+            <div
+              key={row.rowKey}
+              className={`${index % 2 === 0 ? "bg-[#EFF8FF]" : "bg-white"} lg:border-b lg:border-greyscale-20`}
+            >
               <AbsenceItem
                 data={row.absences}
                 studentNum={row.studentNum}

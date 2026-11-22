@@ -13,13 +13,19 @@ const MemoEditor = ({ grade }: { grade: (typeof grades)[number]["value"] }) => {
   return (
     <div className="w-full flex flex-col gap-4">
       <textarea
-        className="w-full h-40 p-2 rounded-medium shadow-modal outline-none resize-none text-body placeholder:text-greyscale-40"
-        placeholder="메모를 입력해주세요."
+        className="w-full h-40 p-3 rounded-medium shadow-modal outline-none resize-none text-caption2 placeholder:text-greyscale-40"
+        placeholder="메모를 입력 해주세요."
         value={memo}
         onChange={onChange}
       />
-      <Button onClick={save} disabled={isPending} buttonSize="large" buttonType="primary">
-        작성 완료
+      <Button
+        onClick={save}
+        disabled={isPending}
+        buttonSize="large"
+        buttonType="primary"
+        style={{ width: "100%" }}
+      >
+        메모 저장
       </Button>
     </div>
   );
@@ -39,10 +45,8 @@ const MemoPanel = () => {
               key={value}
               type="button"
               onClick={() => setSelectedGrade(value)}
-              className={`flex-1 h-10 rounded-medium border text-body transition-colors cursor-pointer ${
-                isActive
-                  ? "border-blue-light bg-blue-light text-static-white"
-                  : "border-greyscale-20 bg-static-white text-greyscale-60"
+              className={`flex-1 h-8 rounded-small text-body transition-colors cursor-pointer ${
+                isActive ? "bg-blue-light text-static-white" : "bg-static-white text-blue-light"
               }`}
             >
               {label}

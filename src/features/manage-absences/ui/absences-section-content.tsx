@@ -27,7 +27,7 @@ const AbsencesSectionContent = ({ allData, todayData }: Props) => {
       headerOptions={
         <>
           <div className="lg:hidden">
-            <CreateAbsence />
+            <CreateAbsence size="small" />
           </div>
           <FilterBar
             options={DATE_FILTER_OPTIONS}
@@ -42,7 +42,7 @@ const AbsencesSectionContent = ({ allData, todayData }: Props) => {
         <FilterBar options={DATE_FILTER_OPTIONS} selected={selected} onChange={setSelected} />
       }
     >
-      <div className="flex-1 min-h-0 overflow-y-auto px-2 xl:px-10">
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain xl:px-10">
         <AbsencesDropdownTable data={selected === "all" ? allData : todayData} allData={allData} />
       </div>
     </Section>

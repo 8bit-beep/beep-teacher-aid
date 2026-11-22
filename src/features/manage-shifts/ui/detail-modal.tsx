@@ -18,21 +18,21 @@ const DetailModal = ({ data }: Props) => {
       </div>
       <div className="w-full flex flex-col gap-1">
         <span className="text-caption1">신청 사유</span>
-        <div className="w-full min-h-24 text-body whitespace-pre-wrap wrap-break-word shadow-modal">
+        <div className="w-full min-h-24 p-3 rounded-medium text-body whitespace-pre-wrap wrap-break-word shadow-modal">
           {data.reason}
         </div>
       </div>
       <div className="w-full flex gap-1">
         <div className="w-full flex flex-col items-start gap-1 p-1">
           <span className="text-caption1">실 이동 시간</span>
-          <p className="w-full text-body break-keep shadow-modal bg-static-white rounded-medium px-5 py-2">
+          <p className="w-full text-body break-keep shadow-modal bg-static-white rounded-medium px-4 py-2">
             {data.checkpoint.name}
           </p>
         </div>
         <div className="w-full flex flex-col items-start gap-1 p-1">
           <span className="text-caption1">요청 내용</span>
-          <div className="flex items-center gap-2">
-            <p className="w-full text-body break-keep shadow-modal bg-static-white rounded-medium px-5 py-2">
+          <div className="w-full flex items-center gap-2">
+            <p className="w-full text-body break-keep shadow-modal bg-static-white rounded-medium px-4 py-2">
               {data.room.name}
             </p>
           </div>

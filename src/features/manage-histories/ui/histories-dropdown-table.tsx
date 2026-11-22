@@ -23,15 +23,15 @@ const HistoriesDropdownTrigger = ({ room, isOpen, toggle }: HistoriesDropdownTri
   return (
     <button
       type="button"
-      className="w-full h-13.5 px-2 flex items-center justify-between border-b border-greyscale-20 cursor-pointer text-left"
+      className="w-full min-h-13.5 px-3 py-3 lg:py-0 lg:px-2 flex items-center justify-between gap-3 border-b border-greyscale-20 cursor-pointer text-left"
       onClick={toggle}
     >
-      <div className="flex flex-col lg:flex-row lg:gap-1.25 items-start lg:items-center">
+      <div className="min-w-0 flex flex-col lg:flex-row lg:gap-1.25 items-start lg:items-center">
         <p className="w-full lg:w-fit text-static-black text-accent">
           {room.grade ? `${room.grade}-${room.classNumber} (${room.name})` : room.name}
         </p>
         <p className="lg:block hidden text-static-black text-accent">·</p>
-        <p className="text-blue-light text-body">
+        <p className="text-blue-light text-caption1 lg:text-body">
           {`인원 ${histories.filter(a => a.statuses[0]?.status).length}/${histories.length}명`}
           {" · "}
           {`외박 ${histories.filter(a => a.statuses[0]?.status?.name === "외박").length}명`}
@@ -40,8 +40,8 @@ const HistoriesDropdownTrigger = ({ room, isOpen, toggle }: HistoriesDropdownTri
         </p>
       </div>
 
-      <div className="flex items-center gap-2 lg:gap-4">
-        <ChevronIcon size={16} className="text-static-black" rotate={isOpen ? 0 : -180} />
+      <div className="shrink-0 flex items-center gap-2 lg:gap-4">
+        <ChevronIcon size={16} className="text-static-black" rotate={isOpen ? 180 : 0} />
       </div>
     </button>
   );
