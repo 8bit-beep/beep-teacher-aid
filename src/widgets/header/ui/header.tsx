@@ -1,8 +1,6 @@
 import { Suspense, type ReactNode } from "react";
 import { useRouter } from "@b1nd/aid-kit/navigation";
 import { useAuth } from "@/features/auth";
-import FilterHistory from "@/features/filter/ui/filter-history";
-import FilterHistoryDateTime from "@/features/filter/ui/filter-history-date-time";
 import FilterRoom from "@/features/filter/ui/filter-room";
 import CreateAbsence from "@/features/manage-absences/ui/create-absence";
 import RefreshButton from "@/features/manage-attends/ui/refresh-button";
@@ -20,16 +18,6 @@ const Header = () => {
   const headerContentMap: Record<string, ReactNode> = {
     [TAB_PATHS.attendance]: <FilterRoom />,
     [TAB_PATHS.absences]: <CreateAbsence />,
-    [TAB_PATHS.histories]: (
-      <div className="w-full flex flex-col sm:flex-row gap-5 sm:gap-4">
-        <div className="flex items-center gap-4">
-          <Suspense fallback={<div className="h-10 w-36 rounded-large bg-static-white" />}>
-            <FilterHistoryDateTime />
-          </Suspense>
-        </div>
-        <FilterHistory />
-      </div>
-    ),
   };
 
   const headerContent = headerContentMap[tab.current];
