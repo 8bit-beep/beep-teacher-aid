@@ -1,7 +1,9 @@
-import { useAppState } from "@b1nd/aid-kit/app-state";
 import { DEFAULT_FLOOR_VALUE } from "@/features/filter/constants/floor";
+import { createSharedAppState } from "@/shared/lib/shared-app-state";
 
 export const ATTENDANCE_FLOOR_STATE_KEY = "attendance-floor";
 
-export const useAttendanceFloor = () =>
-  useAppState<string>(DEFAULT_FLOOR_VALUE, ATTENDANCE_FLOOR_STATE_KEY);
+export const useAttendanceFloor = createSharedAppState(
+  ATTENDANCE_FLOOR_STATE_KEY,
+  DEFAULT_FLOOR_VALUE
+);
