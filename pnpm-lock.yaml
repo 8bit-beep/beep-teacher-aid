@@ -24,8 +24,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.1))(@types/react@19.3.0)(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@beep-ds/ui':
-        specifier: 1.21.0
-        version: 1.21.0(406a4a6dae4418602b809a724fb160ce)
+        specifier: 1.23.0
+        version: 1.23.0(406a4a6dae4418602b809a724fb160ce)
       '@cher1shrxd/toast':
         specifier: ^1.0.2
         version: 1.0.2(lucide-react@0.562.0(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -343,8 +343,8 @@ packages:
       react: '>=19'
       react-dom: '>=19'
 
-  '@beep-ds/ui@1.21.0':
-    resolution: {integrity: sha512-YIjOzmq5sz45ZbZzlv9NkH2wjuY3M9eTvzIGzuS4RamaJJLDcdmeZhZlS/NpJEwSxh29Za1NxlfhOTL70TEBvA==}
+  '@beep-ds/ui@1.23.0':
+    resolution: {integrity: sha512-uQdjCBmQD4sXI43ILAjl/jVS13qpyWBiPd0UJ8B7mZ7/uOrF9NKwhNGmaPV/wrlVB/9P5yHI/iznS1Zuqg3CtA==}
     peerDependencies:
       '@beep-ds/colors': ^1.1.0
       '@beep-ds/shapes': ^1.1.0
@@ -2848,7 +2848,7 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
 
-  '@beep-ds/ui@1.21.0(406a4a6dae4418602b809a724fb160ce)':
+  '@beep-ds/ui@1.23.0(406a4a6dae4418602b809a724fb160ce)':
     dependencies:
       '@beep-ds/colors': 1.1.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@beep-ds/shapes': 1.1.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)

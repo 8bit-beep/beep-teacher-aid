@@ -17,6 +17,7 @@ const BatchChangeBar = ({ count, options, status, setStatus, isPending, onApply 
         <p className="text-body text-static-black whitespace-nowrap">{count}명을</p>
         <div className="shrink-0 compact-dropdown">
           <Dropdown
+            openDirection="auto"
             selected={status}
             onSelect={setStatus}
             options={options}

@@ -47,6 +47,7 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
         <div className="w-full flex flex-col gap-0.5 items-start">
           <span className="text-caption1 text-static-black">외박 사유</span>
           <Dropdown
+            openDirection="auto"
             onSelect={setSelectedType}
             options={options}
             selected={selectedType}

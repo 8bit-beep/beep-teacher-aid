@@ -1,5 +1,7 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import { Button } from "@beep-ds/ui";
+import { useQueryClient } from "@tanstack/react-query";
+import { memoQueryOptions } from "@/entities/memo/queries";
 import { useUpdateMemo } from "../hooks/use-update-memo";
 
 const grades = [
@@ -31,8 +33,26 @@ const MemoEditor = ({ grade }: { grade: (typeof grades)[number]["value"] }) => {
   );
 };
 
+const MemoEditorFallback = () => (
+  <div className="w-full flex flex-col gap-4">
+    <div className="w-full h-40 rounded-medium bg-greyscale-10" />
+    <Button disabled buttonSize="large" buttonType="primary" style={{ width: "100%" }}>
+      메모 저장
+    </Button>
+  </div>
+);
+
 const MemoPanel = () => {
+  const queryClient = useQueryClient();
   const [selectedGrade, setSelectedGrade] = useState<(typeof grades)[number]["value"]>(1);
+  const [, startTransition] = useTransition();
+
+  // 학년 전환 시 Suspense fallback으로 높이가 바뀌지 않도록 모든 학년 메모를 미리 불러온다.
+  useEffect(() => {
+    grades.forEach(({ value }) => {
+      void queryClient.prefetchQuery(memoQueryOptions(value));
+    });
+  }, [queryClient]);
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -44,7 +64,7 @@ const MemoPanel = () => {
             <button
               key={value}
               type="button"
-              onClick={() => setSelectedGrade(value)}
+              onClick={() => startTransition(() => setSelectedGrade(value))}
               className={`flex-1 h-8 rounded-small text-body transition-colors cursor-pointer ${
                 isActive ? "bg-blue-light text-static-white" : "bg-static-white text-blue-light"
               }`}
@@ -55,7 +75,7 @@ const MemoPanel = () => {
         })}
       </div>
       <div className="w-full">
-        <Suspense fallback={<div className="w-full h-40 rounded-medium bg-greyscale-10" />}>
+        <Suspense fallback={<MemoEditorFallback />}>
           <MemoEditor key={selectedGrade} grade={selectedGrade} />
         </Suspense>
       </div>

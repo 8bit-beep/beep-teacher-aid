@@ -1,8 +1,8 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { MemoApi } from "../api";
 
-export const useGetMemo = (grade: number) => {
-  return useSuspenseQuery({
+export const memoQueryOptions = (grade: number) =>
+  queryOptions({
     queryKey: ["memos", grade],
     queryFn: async () => {
       const response = await MemoApi.getMemo(grade);
@@ -26,6 +26,11 @@ export const useGetMemo = (grade: number) => {
         },
       };
     },
+  });
+
+export const useGetMemo = (grade: number) => {
+  return useSuspenseQuery({
+    ...memoQueryOptions(grade),
     refetchInterval: 5000,
   });
 };

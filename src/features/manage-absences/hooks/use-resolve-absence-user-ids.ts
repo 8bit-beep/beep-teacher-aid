@@ -22,19 +22,26 @@ export const useResolveAbsenceUserIds = (targetStudents: AbsenceTargetStudent[])
     () =>
       Array.from(
         new Map(
-          targetStudents.map(student => [
-            getClassKey(student.info.grade, student.info.classNumber),
-            {
-              grade: student.info.grade,
-              classNumber: student.info.classNumber,
-            },
-          ])
+          targetStudents.flatMap(student => {
+            const grade = student.info?.grade;
+            const classNumber = student.info?.classNumber;
+
+            if (grade == null || classNumber == null) return [];
+
+            return [[getClassKey(grade, classNumber), { grade, classNumber }] as const];
+          })
         ).values()
       ),
     [targetStudents]
   );
 
-  const infoIds = useMemo(() => targetStudents.map(student => student.info.id), [targetStudents]);
+  const infoIds = useMemo(
+    () =>
+      targetStudents
+        .map(student => student.info?.id)
+        .filter((id): id is number => id !== undefined && id !== null),
+    [targetStudents]
+  );
 
   const shouldFetch = initialIds.length === 0 && classes.length > 0;
 

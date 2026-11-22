@@ -16,6 +16,7 @@ const ManageOneDayAbsenceModal = ({ data }: Props) => {
         <div className="w-full flex flex-col gap-2" key={status.checkpoint.value}>
           <span className="text-caption1">{status.checkpoint.name}</span>
           <Dropdown
+            openDirection="auto"
             selected={selectedStatuses[index]}
             onSelect={value => handleStatusChange(index, value)}
             options={parseToOptions}

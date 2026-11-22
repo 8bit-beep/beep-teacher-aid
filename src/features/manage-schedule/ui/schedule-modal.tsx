@@ -43,6 +43,7 @@ const ScheduleModal = () => {
               <span className="text-body text-static-black whitespace-nowrap">{grade}학년</span>
               <div className="flex-1 min-w-0">
                 <Dropdown
+                  openDirection="auto"
                   options={getOptions(grade)}
                   selected={
                     getOptions(grade).find(option => option.value === selected[grade]) ?? null

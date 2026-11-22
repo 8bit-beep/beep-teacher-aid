@@ -18,6 +18,7 @@ const ManageHistoryDropdown = ({ data, roomId, index, desktopWidth = "180px" }: 
     <div className={highlightClass}>
       <div className="hidden lg:block">
         <Dropdown
+          openDirection="auto"
           selected={status}
           onSelect={setStatus}
           options={options}
@@ -27,6 +28,7 @@ const ManageHistoryDropdown = ({ data, roomId, index, desktopWidth = "180px" }: 
       </div>
       <div className="lg:hidden">
         <Dropdown
+          openDirection="auto"
           selected={status}
           onSelect={setStatus}
           options={options}

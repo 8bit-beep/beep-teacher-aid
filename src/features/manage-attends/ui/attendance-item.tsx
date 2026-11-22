@@ -35,6 +35,7 @@ const AttendanceItem = ({ data, roomId, selected, onToggleSelect }: Props) => {
       <div className="flex-1" />
       <div className="shrink-0 compact-dropdown">
         <Dropdown
+          openDirection="auto"
           selected={status}
           onSelect={setStatus}
           options={options}
