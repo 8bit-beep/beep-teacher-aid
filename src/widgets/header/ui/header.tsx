@@ -8,12 +8,14 @@ import CreateAbsence from "@/features/manage-absences/ui/create-absence";
 import RefreshButton from "@/features/manage-attends/ui/refresh-button";
 import ManageMemo from "@/features/manage-memo/ui/manage-memo";
 import { TAB_PATHS } from "@/shared/config/tabs";
+import { useHeaderStore } from "@/shared/stores/header";
 import ProfileIcon from "@/shared/icons/profile-icon";
 import logo from "@/assets/logo.svg";
 
 const Header = () => {
   const { tab } = useRouter();
   const { user } = useAuth();
+  const collapsed = useHeaderStore(state => state.collapsed);
 
   const headerContentMap: Record<string, ReactNode> = {
     [TAB_PATHS.attendance]: <FilterRoom />,
@@ -33,7 +35,11 @@ const Header = () => {
   const headerContent = headerContentMap[tab.current];
 
   return (
-    <header className="w-full shrink-0 flex items-center gap-4 py-6 px-4 lg:gap-5 lg:my-4 lg:py-0 lg:px-13.5">
+    <header
+      className={`w-full shrink-0 flex items-center gap-4 px-4 transition-[padding] duration-200 ease-out lg:gap-5 lg:my-4 lg:py-0 lg:px-13.5 ${
+        collapsed ? "py-2" : "py-6"
+      }`}
+    >
       <button
         type="button"
         onClick={() => tab.move(TAB_PATHS.attendance)}
