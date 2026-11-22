@@ -6,8 +6,8 @@ import type { Room } from "@/entities/rooms/types";
 import { useApprove } from "@/features/manage-approvals/hooks/use-approve";
 import { TOAST_ISSUE_DURATION } from "@/shared/constants/toast";
 import { useSwipeToClose } from "@/shared/hooks/use-swipe-to-close";
-import { CloseIcon } from "@/shared/icons/close-icon";
 import { useBatchUpdateAttendance } from "../hooks/use-batch-update-attendance";
+import StackHeader from "@/widgets/stack-header/ui/stack-header";
 import AttendanceItem from "./attendance-item";
 import BatchChangeBar from "./batch-change-bar";
 
@@ -46,25 +46,18 @@ const ManageAttendance = ({ room }: Props) => {
 
   return (
     <div
-      className={`w-full h-full bg-static-white flex flex-col items-start gap-4 px-4 pt-4 ${animationClass}`}
+      className={`w-full h-full bg-static-white flex flex-col items-start gap-4 ${animationClass}`}
       {...handlers}
     >
-      <div className="w-full flex justify-between items-center gap-4">
-        <button
-          type="button"
-          onClick={triggerClose}
-          aria-label="닫기"
-          className="size-11 shrink-0 bg-static-white shadow-modal rounded-full flex items-center justify-center cursor-pointer"
-        >
-          <CloseIcon />
-        </button>
-        <h1 className="min-w-0 text-accent text-static-black truncate">
-          {room.grade && room.classNumber
+      <StackHeader
+        title={
+          room.grade && room.classNumber
             ? `${room.grade}-${room.classNumber} (${room.name})`
-            : room.name}
-        </h1>
-      </div>
-      <div className="w-full flex justify-between items-center gap-3">
+            : room.name
+        }
+        onBack={triggerClose}
+      />
+      <div className="w-full flex justify-between items-center gap-3 px-4">
         <p className="min-w-0 text-blue-light text-body break-keep">
           {`인원 ${currentStudentCount}/${attendances.length}명`}
           {" · "}
@@ -85,7 +78,7 @@ const ManageAttendance = ({ room }: Props) => {
           </Button>
         </div>
       </div>
-      <div className="w-[calc(100%+2rem)] -mx-4 flex-1 min-h-0 flex flex-col overflow-hidden border-t border-greyscale-20 lg:w-full lg:mx-0 lg:border-t-0 lg:rounded-medium lg:shadow-modal">
+      <div className="safe-area-bottom w-full flex-1 min-h-0 flex flex-col overflow-hidden border-t border-greyscale-20">
         <div className="w-full flex-1 overflow-y-auto overscroll-contain">
           {attendances.length > 0 && (
             <div className="w-full h-12 flex items-center px-4 gap-3 border-b border-greyscale-20 bg-static-white sticky top-0 z-[1]">

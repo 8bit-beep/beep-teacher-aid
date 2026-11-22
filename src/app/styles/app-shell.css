@@ -103,3 +103,18 @@ body {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
+
+/* aid-kit StackScreen은 app-shell 밖(position: fixed)에 그려져 app-shell의 safe area 여백을 받지 못한다. */
+.safe-area-top {
+  padding-block-start: max(var(--native-safe-area-top), env(safe-area-inset-top, 0px));
+}
+
+.safe-area-bottom {
+  padding-block-end: max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-bottom-gap {
+  padding-block-end: calc(
+    max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px)) + 16px
+  );
+}
