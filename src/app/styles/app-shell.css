@@ -118,3 +118,17 @@ body {
     max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px)) + 16px
   );
 }
+
+/* @cher1shrxd/toast 컨테이너는 인라인 position: fixed; top: 1.5rem이라 노치에 겹친다.
+   상단 safe area만큼 내리고, 폰 폭에서는 좌우 16px 안에 들어오게 한다. */
+.toast-layer > div {
+  top: calc(max(var(--native-safe-area-top), env(safe-area-inset-top, 0px)) + 12px) !important;
+}
+
+@media (max-width: 1023px) {
+  .toast-layer > div {
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none !important;
+  }
+}

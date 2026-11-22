@@ -52,7 +52,9 @@ function AppShell() {
 
   return (
     <div className="app-shell bg-greyscale-10" style={safeAreaStyle}>
-      <ToastContainer />
+      <div className="toast-layer">
+        <ToastContainer />
+      </div>
       <ModalProvider />
       {isAuthenticated && <Header />}
       <main className="app-shell__scroll">
