@@ -8,7 +8,7 @@ const EventsPage = () => {
   const today = useMemo(() => new Date(), []);
   const date = parseDate(today);
 
-  return <EventPanel today={today} date={date} onClose={stack.pop} />;
+  return <EventPanel today={today} date={date} onClose={() => stack.pop()} />;
 };
 
 export default EventsPage;
