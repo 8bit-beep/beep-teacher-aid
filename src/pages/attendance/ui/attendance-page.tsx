@@ -10,7 +10,7 @@ import { useSectionCollapsed } from "@/widgets/section/hooks/use-section-collaps
 import Section from "@/widgets/section/ui/section";
 
 const AttendancePage = () => {
-  const collapsed = useSectionCollapsed();
+  const scrollCollapse = useSectionCollapsed();
 
   return (
     <div className="w-full h-full flex flex-col gap-4.5 lg:px-13.5 lg:pb-6">
@@ -30,7 +30,7 @@ const AttendancePage = () => {
         mobileFilter={
           <div className="w-full flex flex-col">
             <FloorFilterBar />
-            <Collapsible collapsed={collapsed}>
+            <Collapsible collapsed={scrollCollapse.collapsed} enabled={scrollCollapse.enabled}>
               <div className="pt-4 pb-1">
                 <ScheduleButton variant="select" />
               </div>

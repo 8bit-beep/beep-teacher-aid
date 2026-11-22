@@ -132,3 +132,17 @@ body {
     max-width: none !important;
   }
 }
+
+/* 상단이 접히는 동안 줄어든 만큼 목록 맨 위에 빈 공간을 더해, 내용이 상단을 따라 1:1로 올라가고
+   상단이 다 접힌 뒤에야 목록이 스크롤되게 한다(shared/lib/scroll-collapse.ts).
+   padding-top을 쓰면 sticky 기준선까지 함께 내려가(반별 조회 교시 헤더) ::before 공간으로 만든다.
+   공간이 바뀔 때 브라우저가 scrollTop을 보정하지 않도록 scroll anchoring을 끈다. */
+[data-collapse-scroller] {
+  overflow-anchor: none;
+}
+
+[data-collapse-scroller]::before {
+  content: "";
+  display: block;
+  block-size: var(--collapse-offset, 0px);
+}

@@ -60,8 +60,8 @@ const ClassroomTable = () => {
           })}
         />
       </div>
-      <div className="flex lg:hidden w-full flex-1 min-h-0 overflow-auto overscroll-contain">
-        <div className="min-w-full w-max self-start">
+      <div className="block lg:hidden w-full flex-1 min-h-0 overflow-auto overscroll-contain">
+        <div className="min-w-full w-max">
           <div className="sticky top-0 z-[1] flex gap-2.5 px-4 py-3 bg-blue-light">
             {firstStatuses.map(s => (
               <p

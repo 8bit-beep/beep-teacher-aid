@@ -1,5 +1,5 @@
 import "./styles/app-shell.css";
-import { useEffect, type CSSProperties, type UIEvent } from "react";
+import { useEffect, useRef, type CSSProperties, type UIEvent } from "react";
 import { BridgeProvider } from "@b1nd/aid-kit/bridge-kit/web";
 import { SafeAreaProvider, useSafeArea } from "@b1nd/aid-kit/safe-area-provider";
 import { AppStateProvider } from "@b1nd/aid-kit/app-state";
@@ -10,6 +10,7 @@ import { ToastContainer } from "@cher1shrxd/toast";
 import { AuthProvider, useAuthState } from "@/features/auth";
 import { TAB_PATHS } from "@/shared/config/tabs";
 import { queryClient } from "@/shared/lib/query-refresh";
+import { createScrollCollapse } from "@/shared/lib/scroll-collapse";
 import { useHeaderStore } from "@/shared/stores/header";
 import Header from "@/widgets/header/ui/header";
 import Tabbar from "@/widgets/tabbar/ui/tabbar";
@@ -24,8 +25,7 @@ type SafeAreaProperties = CSSProperties & {
 
 const VALID_TAB_PATHS = routes.tabs.map(tab => tab.path);
 
-// 목록이 이만큼 내려가면 헤더를 축소한다. 맨 위(0)로 돌아오면 다시 펼친다.
-const HEADER_COLLAPSE_OFFSET = 8;
+const scrollCollapse = createScrollCollapse();
 
 function AppShell() {
   const { top, bottom } = useSafeArea();
@@ -35,6 +35,7 @@ function AppShell() {
   const isStackOpen = stack.current.length > 0;
   const setHeaderCollapsed = useHeaderStore(state => state.setCollapsed);
   const currentTab = tab.current;
+  const shellRef = useRef<HTMLDivElement>(null);
   const safeAreaStyle: SafeAreaProperties = {
     "--native-safe-area-top": `${top}px`,
     "--native-safe-area-bottom": `${bottom}px`,
@@ -48,6 +49,7 @@ function AppShell() {
 
   // 탭을 바꾸면 새 목록은 맨 위에서 시작하므로 헤더를 펼친다.
   useEffect(() => {
+    scrollCollapse.reset(shellRef.current);
     setHeaderCollapsed(false);
   }, [currentTab, setHeaderCollapsed]);
 
@@ -58,7 +60,11 @@ function AppShell() {
       return;
     }
 
-    setHeaderCollapsed(event.target.scrollTop > HEADER_COLLAPSE_OFFSET);
+    // 접힘 정도는 스크롤 위치에 비례해 CSS 변수로 매 프레임 반영하고,
+    // React 상태는 완전히 접혔는지만 갖는다(포커스·보조기기 처리용).
+    const progress = scrollCollapse.onScroll(shellRef.current, event.target);
+
+    setHeaderCollapsed(progress >= 1);
   };
 
   useEffect(() => {
@@ -72,7 +78,7 @@ function AppShell() {
   }, []);
 
   return (
-    <div className="app-shell bg-greyscale-10" style={safeAreaStyle}>
+    <div ref={shellRef} className="app-shell bg-greyscale-10" style={safeAreaStyle}>
       <div className="toast-layer">
         <ToastContainer />
       </div>

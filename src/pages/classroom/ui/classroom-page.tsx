@@ -12,6 +12,7 @@ const ClassroomPage = () => {
         title="반별 조회"
         description="학생들의 반별 출석여부를 조회하세요!"
         icon={<DashboardIcon size={24} />}
+        collapseHeaderOnScroll
         headerOptions={
           <div className="flex items-center gap-3">
             <FilterDate />

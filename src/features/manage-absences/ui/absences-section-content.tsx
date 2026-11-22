@@ -24,6 +24,7 @@ const AbsencesSectionContent = ({ allData, todayData }: Props) => {
       title="외박자 관리"
       description="장기 외박하는 학생들을 관리하세요!"
       icon={<CalendarIcon size={24} />}
+      collapseHeaderOnScroll
       headerOptions={
         <>
           <div className="lg:hidden">

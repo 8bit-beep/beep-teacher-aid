@@ -24,16 +24,21 @@ const Section = ({
   collapseHeaderOnScroll = false,
   children,
 }: Props) => {
-  const sectionCollapsed = useSectionCollapsed();
-  const headerCollapsed = collapseHeaderOnScroll && sectionCollapsed;
+  const scrollCollapse = useSectionCollapsed();
+  const collapseEnabled = collapseHeaderOnScroll && scrollCollapse.enabled;
 
   return (
     <section
-      className={`w-full min-h-0 flex-1 bg-static-white flex flex-col overflow-hidden px-4 transition-[padding] duration-200 ease-out lg:px-0 lg:pt-5 lg:gap-5 lg:rounded-large lg:shadow-modal ${
-        headerCollapsed ? "pt-3" : "pt-6"
+      data-collapse-section={collapseEnabled ? "" : undefined}
+      className={`w-full min-h-0 flex-1 bg-static-white flex flex-col overflow-hidden px-4 lg:px-0 lg:pt-5 lg:gap-5 lg:rounded-large lg:shadow-modal ${
+        collapseEnabled ? "pt-[calc(24px-12px*var(--collapse-progress,0))]" : "pt-6"
       }`}
     >
-      <Collapsible collapsed={headerCollapsed} className="shrink-0">
+      <Collapsible
+        collapsed={collapseEnabled && scrollCollapse.collapsed}
+        enabled={collapseEnabled}
+        className="shrink-0"
+      >
         <header className="min-h-10 mb-5 flex items-center gap-2 lg:mb-0 lg:h-11.5 lg:px-10">
           <div className="shrink-0 text-static-black">{icon}</div>
           <div className="flex-1 min-w-0 flex flex-col">
