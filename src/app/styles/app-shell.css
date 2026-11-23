@@ -146,3 +146,11 @@ body {
   display: block;
   block-size: var(--collapse-offset, 0px);
 }
+
+/* DS Dropdown 옵션 목록은 body 직계 포털(z-index: 100000)로 렌더링된다.
+   목록 끝까지 스크롤한 뒤 드래그/휠이 뒤쪽 스크롤 영역(학생 리스트)으로
+   전달(scroll chaining)되지 않도록 목록 안에서 스크롤을 가둔다. */
+body > div[style*="z-index: 100000"] > ul {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
