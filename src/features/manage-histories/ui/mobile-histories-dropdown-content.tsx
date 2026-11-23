@@ -1,72 +1,51 @@
-import type { Attendance } from "@/entities/attendances/types";
 import { useGetAllCheckpointHistories } from "@/entities/histories/queries";
 import type { Room } from "@/entities/rooms/types";
 import { useDateStore } from "@/features/filter/stores/date";
+import { MOBILE_STATUS_CELL_WIDTH } from "@/shared/constants/table-widths";
 import ManageHistoryDropdown from "./manage-history-dropdown";
 
 interface Props {
   room: Room;
 }
 
-interface MobileHistoriesDropdownContentItemProps {
-  data: Attendance;
-  roomId: number;
-}
-
-const MobileHistoriesDropdownContentHeader = ({
-  checkpointNames,
-}: {
-  checkpointNames: string[];
-}) => {
-  return (
-    <div className="w-full flex p-2.5 pr-5 gap-4">
-      <div className="flex-1" />
-      {checkpointNames.map(label => (
-        <p key={label} className="w-full text-static-black text-caption1 text-center">
-          {label}
-        </p>
-      ))}
-    </div>
-  );
-};
-
-const MobileHistoriesDropdownContentItem = ({
-  data,
-  roomId,
-}: MobileHistoriesDropdownContentItemProps) => {
-  return (
-    <div className="w-full flex flex-col gap-2">
-      <div className="w-full flex flex-row gap-2">
-        <p className="text-accent text-greyscale-40">{data.studentId}</p>
-        <p className="text-accent text-static-black">{data.name}</p>
-      </div>
-      <div className="w-full flex flex-row gap-2 overflow-x-auto">
-        {data.statuses.map((statusItem, statusIndex) => (
-          <div key={statusItem.checkpoint.id} className="flex-1 min-w-24">
-            <ManageHistoryDropdown data={data} roomId={roomId} index={statusIndex} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const MobileHistoriesDropdownContent = ({ room }: Props) => {
   const { date } = useDateStore();
   const histories = useGetAllCheckpointHistories(room.id, date).data.data;
 
-  const checkpointNames = histories[0]?.statuses.map(s => s.checkpoint.name) ?? [];
+  const checkpoints = histories[0]?.statuses.map(s => s.checkpoint) ?? [];
 
   return (
-    <div className="w-full bg-static-white lg:rounded-l-large flex flex-col items-start slide-in-down">
-      <MobileHistoriesDropdownContentHeader checkpointNames={checkpointNames} />
-      <div className="w-full">
+    <div className="w-full overflow-x-auto bg-static-white slide-in-down">
+      <div className="min-w-full w-max">
+        <div className="flex gap-2.5 px-4 py-2.5">
+          {checkpoints.map(checkpoint => (
+            <p
+              key={checkpoint.id}
+              className={`${MOBILE_STATUS_CELL_WIDTH} shrink-0 text-center text-caption2 text-greyscale-60 whitespace-nowrap`}
+            >
+              {checkpoint.name}
+            </p>
+          ))}
+        </div>
         {histories.map((history, index) => (
           <div
             key={history.userId}
-            className={`w-full flex items-center px-5 py-3 gap-4 ${index % 2 === 0 ? "bg-[#EFF8FF]" : "bg-white"}`}
+            className={`flex flex-col gap-1.5 px-4 pt-2 pb-3 ${index % 2 === 0 ? "bg-[#EFF8FF]" : "bg-static-white"}`}
           >
-            <MobileHistoriesDropdownContentItem data={history} roomId={room.id} />
+            <div className="sticky left-4 w-fit flex items-center gap-2">
+              <p className="text-caption2 text-greyscale-40 tabular-nums">{history.studentId}</p>
+              <p className="text-body text-static-black">{history.name}</p>
+            </div>
+            <div className="flex gap-2.5">
+              {history.statuses.map((statusItem, statusIndex) => (
+                <div
+                  key={statusItem.checkpoint.id}
+                  className={`${MOBILE_STATUS_CELL_WIDTH} shrink-0 compact-dropdown`}
+                >
+                  <ManageHistoryDropdown data={history} roomId={room.id} index={statusIndex} />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

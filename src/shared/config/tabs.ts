@@ -2,8 +2,6 @@ export const TAB_PATHS = {
   attendance: "/attendance",
   classroom: "/classroom",
   absences: "/absences",
-  shifts: "/shifts",
-  histories: "/histories",
 } as const;
 
 export const STACK_PATHS = {

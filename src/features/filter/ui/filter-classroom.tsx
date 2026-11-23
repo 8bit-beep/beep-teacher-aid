@@ -7,6 +7,7 @@ const FilterClassroom = () => {
 
   return (
     <Dropdown
+      openDirection="auto"
       selected={classroom}
       onSelect={setClassroom}
       options={CLASSROOM_OPTIONS}

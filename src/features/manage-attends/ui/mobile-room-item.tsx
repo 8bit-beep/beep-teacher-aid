@@ -10,19 +10,6 @@ interface Props {
   approvedTeacher?: string;
 }
 
-const ApprovedInfo = ({
-  approvedAt,
-  approvedTeacher,
-}: {
-  approvedAt: string;
-  approvedTeacher: string;
-}) => (
-  <div className="flex w-full">
-    <p className="text-caption1 inline-block w-full">{approvedAt}</p>
-    <p className="text-caption1 inline-block w-full">{approvedTeacher}</p>
-  </div>
-);
-
 const MobileRoomItem = ({ data, approvedAt, approvedTeacher }: Props) => {
   const { attendances, toggleOpen } = useToggleData(data);
   const { isApproved, toggleApproval } = useApprove(data.id);
@@ -34,50 +21,42 @@ const MobileRoomItem = ({ data, approvedAt, approvedTeacher }: Props) => {
 
     return status != null && !["외박", "외출"].includes(status.name);
   }).length;
+  const countByStatus = (name: string) =>
+    attendances.filter(a => a.statuses[0]?.status?.name === name).length;
 
-  const stats = `인원 ${currentStudentCount}/${attendances.length}명 · 외박 ${attendances.filter(a => a.statuses[0]?.status?.name === "외박").length}명 · 외출 ${attendances.filter(a => a.statuses[0]?.status?.name === "외출").length}명`;
+  const stats = `${currentStudentCount}/${attendances.length}명 · 외박 ${countByStatus("외박")}명 · 외출 ${countByStatus("외출")}명`;
+  const showApprovedInfo = isApproved && approvedAt && approvedTeacher;
 
   return (
     <div
-      className="w-full flex flex-col items-center border-b active:bg-zinc-200 border-greyscale-20 cursor-pointer text-h4 px-3 py-[15px] gap-[10px]"
+      className="w-full flex flex-col border-b border-greyscale-20 active:bg-greyscale-10 cursor-pointer px-3 py-3 gap-2.5"
       onClick={toggleOpen}
     >
-      <div className="w-full flex items-center gap-2">
-        <p className="w-full text-body">{label}</p>
-        <div className="flex w-full">
-          {isApproved && approvedAt && approvedTeacher ? (
-            <ApprovedInfo approvedAt={approvedAt} approvedTeacher={approvedTeacher} />
-          ) : (
-            <p className="text-caption1 w-full text-blue-light">{stats}</p>
-          )}
-        </div>
-        <ChevronIcon size={16} className="text-static-black" rotate={-90} />
-      </div>
-      <div className="w-full flex items-center">
-        {isApproved && approvedAt && approvedTeacher ? (
-          <Button
-            style={{ width: "100%" }}
-            buttonType="danger"
-            onClick={e => {
-              e.stopPropagation();
-              toggleApproval();
-            }}
-          >
-            승인취소
-          </Button>
+      <div className="w-full min-h-6 flex items-center gap-2">
+        <p className="w-[38%] shrink-0 text-body text-static-black truncate">{label}</p>
+        {showApprovedInfo ? (
+          <div className="flex-1 min-w-0 flex items-center gap-2 text-caption1 text-static-black">
+            <p className="flex-1 min-w-0 truncate">{approvedTeacher}</p>
+            <p className="flex-1 min-w-0 truncate">{approvedAt}</p>
+          </div>
         ) : (
-          <Button
-            style={{ width: "100%" }}
-            buttonType="primary"
-            onClick={e => {
-              e.stopPropagation();
-              toggleApproval();
-            }}
-          >
-            승인하기
-          </Button>
+          <p className="flex-1 min-w-0 text-[13px] font-medium leading-tight text-blue-light break-keep">
+            {stats}
+          </p>
         )}
+        <ChevronIcon size={16} className="shrink-0 text-static-black" rotate={-90} />
       </div>
+      <Button
+        style={{ width: "100%" }}
+        buttonSize="small"
+        buttonType={isApproved ? "danger" : "primary"}
+        onClick={e => {
+          e.stopPropagation();
+          toggleApproval();
+        }}
+      >
+        {isApproved ? "승인취소" : "승인하기"}
+      </Button>
     </div>
   );
 };

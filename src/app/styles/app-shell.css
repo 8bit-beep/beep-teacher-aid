@@ -58,3 +58,91 @@ body {
   );
   max-inline-size: 100%;
 }
+
+/* 폰 화면에서 모달이 내용 폭만큼 좁아지지 않도록 디자인처럼 화면 폭(좌우 16px 여백)에 맞춘다. */
+@media (max-width: 1023px) {
+  #bds-modal-root > div > div {
+    inline-size: 100%;
+    max-inline-size: 480px;
+  }
+}
+
+/* 좁은 화면에서 DS Dropdown의 기본 좌우 여백(20px)이 커서 "교실자습" 같은
+   상태명이 말줄임되므로, 표 안의 드롭다운은 여백을 줄여 디자인 폭에 맞춘다. */
+.compact-dropdown div:has(> div > span + svg) {
+  padding-inline: 12px !important;
+}
+
+.compact-dropdown div:has(> span + svg) {
+  gap: 6px !important;
+}
+
+/* 웹뷰 앱이므로 스크롤바를 숨겨 네이티브 화면처럼 보이게 한다. */
+.app-shell *,
+#bds-modal-root * {
+  scrollbar-width: none;
+}
+
+.app-shell *::-webkit-scrollbar,
+#bds-modal-root *::-webkit-scrollbar {
+  display: none;
+}
+
+/* 모달 안 "시작일 ~ 종료일" 두 DatePicker가 좁은 폭에서 줄바꿈되지 않도록
+   남는 폭을 반씩 나눠 쓰고 여백과 글자 크기를 줄인다. */
+.date-range > div {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto !important;
+  padding-inline: 12px !important;
+  gap: 6px !important;
+}
+
+.date-range > div > span {
+  white-space: nowrap;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* aid-kit StackScreen은 app-shell 밖(position: fixed)에 그려져 app-shell의 safe area 여백을 받지 못한다. */
+.safe-area-top {
+  padding-block-start: max(var(--native-safe-area-top), env(safe-area-inset-top, 0px));
+}
+
+.safe-area-bottom {
+  padding-block-end: max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-bottom-gap {
+  padding-block-end: calc(
+    max(var(--native-safe-area-bottom), env(safe-area-inset-bottom, 0px)) + 16px
+  );
+}
+
+/* @cher1shrxd/toast 컨테이너는 인라인 position: fixed; top: 1.5rem이라 노치에 겹친다.
+   상단 safe area만큼 내리고, 폰 폭에서는 좌우 16px 안에 들어오게 한다. */
+.toast-layer > div {
+  top: calc(max(var(--native-safe-area-top), env(safe-area-inset-top, 0px)) + 12px) !important;
+}
+
+@media (max-width: 1023px) {
+  .toast-layer > div {
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none !important;
+  }
+}
+
+/* 상단이 접히는 동안 줄어든 만큼 목록 맨 위에 빈 공간을 더해, 내용이 상단을 따라 1:1로 올라가고
+   상단이 다 접힌 뒤에야 목록이 스크롤되게 한다(shared/lib/scroll-collapse.ts).
+   padding-top을 쓰면 sticky 기준선까지 함께 내려가(반별 조회 교시 헤더) ::before 공간으로 만든다.
+   공간이 바뀔 때 브라우저가 scrollTop을 보정하지 않도록 scroll anchoring을 끈다. */
+[data-collapse-scroller] {
+  overflow-anchor: none;
+}
+
+[data-collapse-scroller]::before {
+  content: "";
+  display: block;
+  block-size: var(--collapse-offset, 0px);
+}

@@ -18,6 +18,7 @@ const ClassroomDropdown = ({ data, statusIndex, desktopWidth = "180px", date }: 
         className={`hidden lg:block ${status?.name === "미출석" ? "rounded-large outline-2 outline-red-light" : ""}`}
       >
         <Dropdown
+          openDirection="auto"
           selected={status}
           onSelect={setStatus}
           options={options}
@@ -29,6 +30,7 @@ const ClassroomDropdown = ({ data, statusIndex, desktopWidth = "180px", date }: 
         className={`lg:hidden ${status?.name === "미출석" ? "rounded-large outline-2 outline-red-light" : ""}`}
       >
         <Dropdown
+          openDirection="auto"
           selected={status}
           onSelect={setStatus}
           options={options}

@@ -1,10 +1,14 @@
 import { Button, modal } from "@beep-ds/ui";
 import CreateAbsenceModal from "./create-absence-modal";
 
-const CreateAbsence = () => {
+interface Props {
+  size?: "small" | "medium";
+}
+
+const CreateAbsence = ({ size = "medium" }: Props) => {
   return (
     <Button
-      buttonSize="medium"
+      buttonSize={size}
       buttonType="primary"
       onClick={() =>
         modal.open({
@@ -13,7 +17,7 @@ const CreateAbsence = () => {
         })
       }
     >
-      외박자 추가하기
+      {size === "small" ? "외박자 추가" : "외박자 추가하기"}
     </Button>
   );
 };

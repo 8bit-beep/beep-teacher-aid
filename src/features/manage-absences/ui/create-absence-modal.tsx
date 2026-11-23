@@ -47,6 +47,7 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
         <div className="w-full flex flex-col gap-0.5 items-start">
           <span className="text-caption1 text-static-black">외박 사유</span>
           <Dropdown
+            openDirection="auto"
             onSelect={setSelectedType}
             options={options}
             selected={selectedType}
@@ -62,7 +63,7 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
         />
         <div className="w-full flex flex-col gap-0.5">
           <span className="text-caption1 text-static-black">외박 기간</span>
-          <div className="w-full flex items-center gap-2.5 justify-between">
+          <div className="w-full flex items-center gap-2 justify-between date-range">
             <DatePicker date={startAt} onChangeDate={setStartAt} title="시작일 선택" />
             <span className="text-caption1 text-static-black">~</span>
             <DatePicker date={endAt} onChangeDate={setEndAt} title="종료일 선택" />
@@ -101,7 +102,7 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
           {drafts.map(draft => (
             <div
               key={draft.id}
-              className="w-full flex items-center gap-4 rounded-medium border border-greyscale-20 px-4 py-3"
+              className="w-full flex items-center gap-3 rounded-small bg-greyscale-10 px-3 py-3"
             >
               <Button
                 buttonSize="medium"
@@ -115,9 +116,9 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
                   height: "auto",
                 }}
               >
-                <p className="flex items-center gap-4">
-                  <span className="text-accent text-blue-light">{draft.type.name}</span>
-                  <span className="text-body text-static-black">
+                <p className="min-w-0 flex items-center gap-3">
+                  <span className="shrink-0 text-body text-blue-light">{draft.type.name}</span>
+                  <span className="min-w-0 text-caption2 text-static-black truncate tabular-nums">
                     {draft.startDate} ~ {draft.endDate}
                   </span>
                 </p>
@@ -140,13 +141,12 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
         onClick={() => setPhase("add")}
         style={{
           width: "100%",
-          border: "1px dashed var(--color-greyscale-30)",
-          borderRadius: "var(--radius-medium)",
-          paddingTop: "8px",
-          paddingBottom: "8px",
+          height: "50px",
+          background: "var(--color-greyscale-10)",
+          borderRadius: "var(--radius-small)",
         }}
       >
-        <span className="text-title3 text-blue-light">+</span>
+        <span className="text-h4 text-blue-light">+</span>
       </Button>
 
       <div className="w-full flex items-center gap-4">
@@ -170,10 +170,18 @@ const CreateAbsenceModal = ({ initialSelectedStudents, initialPhase }: Props) =>
         >
           대상 선택하기
         </Button>
-        <p className="text-blue-light text-caption1">{selectedStudents.length}명 선택됨</p>
+        <p className="text-blue-light text-caption1 whitespace-nowrap">
+          {selectedStudents.length}명 선택됨
+        </p>
       </div>
 
-      <Button buttonSize="large" buttonType="primary" onClick={submit} disabled={disabled}>
+      <Button
+        buttonSize="large"
+        buttonType="primary"
+        onClick={submit}
+        disabled={disabled}
+        style={{ width: "100%" }}
+      >
         완료
       </Button>
     </div>

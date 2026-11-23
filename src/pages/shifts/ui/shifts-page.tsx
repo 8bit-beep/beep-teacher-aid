@@ -5,7 +5,7 @@ import Section from "@/widgets/section/ui/section";
 
 const ShiftsPage = () => {
   return (
-    <div className="w-full h-full flex flex-col gap-4.5 px-5 pb-5 lg:px-13.5 lg:pb-6">
+    <div className="w-full h-full flex flex-col gap-4.5 lg:px-13.5 lg:pb-6">
       <Section
         title="실 이동 관리"
         description="실 이동 목록을 확인해 보세요!"

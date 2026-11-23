@@ -1,4 +1,4 @@
-import { Button, Dropdown, type DropdownItem } from "@beep-ds/ui";
+import { Dropdown, type DropdownItem } from "@beep-ds/ui";
 import CheckIcon from "@/shared/icons/check-icon";
 
 interface Props {
@@ -12,34 +12,27 @@ interface Props {
 
 const BatchChangeBar = ({ count, options, status, setStatus, isPending, onApply }: Props) => {
   return (
-    <div className="w-full shrink-0 border-t border-greyscale-10 p-4 flex items-center justify-between gap-2 bg-static-white">
-      <div className="flex items-center gap-2.5">
-        <p className="text-h4 text-static-black whitespace-nowrap">{count}명을</p>
-        <Dropdown
-          selected={status}
-          onSelect={setStatus}
-          options={options}
-          dropdownSize="small"
-          width="120px"
-        />
-        <p className="text-h4 text-static-black whitespace-nowrap">(으)로 변경하기</p>
-      </div>
-      <div className="hidden min-[453px]:block">
-        <Button
-          buttonSize="small"
-          buttonType="primary"
-          disabled={!status || isPending}
-          onClick={onApply}
-          style={{ width: "100px", height: "30px", borderRadius: "8px" }}
-        >
-          {isPending ? "변경 중..." : "완료"}
-        </Button>
+    <div className="w-full shrink-0 border-t border-greyscale-10 px-4 py-3 flex items-center justify-between gap-2 bg-static-white">
+      <div className="min-w-0 flex items-center gap-2">
+        <p className="text-body text-static-black whitespace-nowrap">{count}명을</p>
+        <div className="shrink-0 compact-dropdown">
+          <Dropdown
+            openDirection="auto"
+            selected={status}
+            onSelect={setStatus}
+            options={options}
+            dropdownSize="small"
+            width="104px"
+          />
+        </div>
+        <p className="text-body text-static-black whitespace-nowrap">(으)로 변경하기</p>
       </div>
       <button
         type="button"
         disabled={!status || isPending}
         onClick={onApply}
-        className="min-[453px]:hidden w-[35px] h-[35px] shrink-0 rounded-full bg-blue-light text-static-white flex items-center justify-center cursor-pointer disabled:bg-greyscale-20"
+        aria-label={isPending ? "변경 중" : "변경 완료"}
+        className="size-9 shrink-0 rounded-full bg-blue-light text-static-white flex items-center justify-center cursor-pointer disabled:bg-greyscale-20"
       >
         <CheckIcon size={24} />
       </button>

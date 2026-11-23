@@ -34,7 +34,7 @@ const ScheduleModal = () => {
   };
 
   return (
-    <div className="w-60 max-w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-3 px-2.5 py-3">
         {GRADES.map((grade, index) => (
           <Fragment key={grade}>
@@ -43,6 +43,7 @@ const ScheduleModal = () => {
               <span className="text-body text-static-black whitespace-nowrap">{grade}학년</span>
               <div className="flex-1 min-w-0">
                 <Dropdown
+                  openDirection="auto"
                   options={getOptions(grade)}
                   selected={
                     getOptions(grade).find(option => option.value === selected[grade]) ?? null
